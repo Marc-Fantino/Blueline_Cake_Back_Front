@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cake index{% endblock %}
+{% block script %}
+<script>
+ import App from '../../assets/components/App';
+ export default {
+ components: {App}
+ }
+</script>
+{% endblock %}
+{% block body %}
+    <div id="app"></div>
+    <h1>Cake index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom_cake</th>
+                <th>Photo_cake</th>
+                <th>Description_carte</th>
+                <th>Tips_recette</th>
+                <th>Temps</th>
+                <th>Difficulté</th>
+                <th>Recette</th>
+                <th>Video</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cake in cakes %}
+            <tr>
+                <td>{{ cake.id }}</td>
+                <td>{{ cake.nomCake }}</td>
+                <td>{{ cake.photoCake }}</td>
+                <td>{{ cake.descriptionCarte }}</td>
+                <td>{{ cake.tipsRecette }}</td>
+                <td>{{ cake.temps }}</td>
+                <td>{{ cake.difficulté }}</td>
+                <td>{{ cake.recette }}</td>
+                <td>{{ cake.video }}</td>
+                <td>
+                    <a href="{{ path('app_cake_show', {'id': cake.id}) }}">show</a>
+                    <a href="{{ path('app_cake_edit', {'id': cake.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cake_new') }}">Create new</a>
+
+{% endblock %}
